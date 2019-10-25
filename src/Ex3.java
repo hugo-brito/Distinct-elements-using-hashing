@@ -51,7 +51,12 @@ public class Ex3 {
 	Ex3 (int m) {
 		if (!isPowerOfTwo(m)) throw new InputMismatchException("m: " + m + "\nThe provided m is not a power of 2!");
 		this.m = m;
+		// the size of m is a parameter of the algorithm
+		// the larger the more precise
+
 		this.V = m; // # of empty buckets
+
+		//	for i:=0 to m-1 do M[i]:=0
 		this.M = new int[m];
 	}
 
@@ -63,6 +68,9 @@ public class Ex3 {
 	// The hashing function
 		int res = 0;
 		for (int i = 0; i < A.length; i++) res += (Integer.bitCount(A[i] & x) % 2) << (31-i);
+		//                                                 ^^^^^^^^^^^^^^^^^^^^          ^^^^
+		// how many bits do I have when multiply the given number by a given row in A     ^^
+		//                                                          put the resulting bit the right position
 		return res;
 	}
 
@@ -79,16 +87,23 @@ public class Ex3 {
 
 	public void addToM(int x) {
 		// adds another integer to the matrix M
+
+		// j := f(y[i])
 		int j = f(x);
+
+		//	V := |{i | M[i]=0}|
 		if (M[j] == 0) V--;
+
+		//	    M[j] := max(M[j],rho(h(y[i])))
 		M[j] = Math.max(M[j], rho(h(x)));
 	}
 
 	private void calculateZ () {
 		// Calculates the Harmonic Mean and saves it to the local field Z
 		double res = 0.0;
+
+		//	Z := 1/(2^(-M[0])+...+2^(-M[m-1]))
 		for (int i = 0; i < m; i++) res = res + Math.pow(2.0,-M[i]);
-		System.out.println();
 		Z = 1.0/res;
 	}
 
@@ -103,13 +118,18 @@ public class Ex3 {
 	public double E () {
 		// Estimation of the number of distinct elements
 		calculateZ();
+
+		//	E := m*m*Z*0.7213/(1 + 1.079/m)
 		double E = (m * m * Z * 0.7213)/(1.0 + (1.079/m));
+
+		//		if (E < 2.5*m and V > 0) then E:= m * ln(m/V)
 		if ((E < (2.5 * m)) && (V > 0)) E = ((double) m) * Math.log(((double)m)/((double)V));
+
 		return E;
 	}
 
 	static boolean isPowerOfTwo (int n) {
-		if(n==0) return false;
+		if (n==0) return false;
 		return (int)(Math.ceil((Math.log(n) / Math.log(2)))) == (int)(Math.floor(((Math.log(n) / Math.log(2)))));
 	}
 
@@ -123,27 +143,10 @@ public class Ex3 {
 		}
 
 		System.err.println(ex3.V == ex3.naiveV());
-
 		double E = ex3.E();
-
 		System.err.println(E);
 
 		System.out.println(E > threshold ? "above" : "below");
 
-		//	for i:=0 to m-1 do M[i]:=0
-		// the size of m is a parameter of the algorithm
-		// the larger the more precise
-
-//	for i:=1 to n do
-		// another parameter of the algorithm: the number of integers
-
-// j := f(y[i])
-//	    M[j] := max(M[j],rho(h(y[i])))
-//	end
-//	Z := 1/(2^(-M[0])+...+2^(-M[m-1]))
-//	V := |{i | M[i]=0}|
-//	E := m*m*Z*0.7213/(1 + 1.079/m)
-//			if (E < 2.5*m and V > 0) then E:= m * ln(m/V)
-//	return E
 	}
 }
