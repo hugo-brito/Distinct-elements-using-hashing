@@ -3,7 +3,7 @@ import java.util.Scanner;
 
 public class Ex3 {
 
-	private static int[] A = {
+	private static final int[] A = {
 	// Needed for the hashing function
 			0x21ae4036,
 			0x32435171,
@@ -38,9 +38,14 @@ public class Ex3 {
 			0x744edb48,
 			0x19adce93};
 
-	private int m;
+	// m = the number of buckets = size of M
+	private final int m;
 	private int M[];
+
+	// V = number of empty buckets in M
 	private int V;
+
+	// Z = the harmonic mean
 	private double Z;
 
 	Ex3 (int m) {
@@ -54,14 +59,14 @@ public class Ex3 {
 		this(1024);
 	}
 
-	private int h (int x) {
+	private static int h (int x) {
 	// The hashing function
 		int res = 0;
 		for (int i = 0; i < A.length; i++) res += (Integer.bitCount(A[i] & x) % 2) << (31-i);
 		return res;
 	}
 
-	private int rho (int x) {
+	private static int rho (int x) {
 		if (x == 0) throw new InputMismatchException("Zero has no leading zeroes.");
 		return Integer.numberOfLeadingZeros(x) + 1;
 	}
@@ -73,13 +78,14 @@ public class Ex3 {
 	}
 
 	public void addToM(int x) {
+		// adds another integer to the matrix M
 		int j = f(x);
 		if (M[j] == 0) V--;
 		M[j] = Math.max(M[j], rho(h(x)));
 	}
 
 	private void calculateZ () {
-		//	Harmonic Mean
+		// Calculates the Harmonic Mean and saves it to the local field Z
 		double res = 0.0;
 		for (int i = 0; i < m; i++) res = res + Math.pow(2.0,-M[i]);
 		System.out.println();
@@ -87,26 +93,19 @@ public class Ex3 {
 	}
 
 	private int naiveV () {
-		// # of empty buckets
+		// Naive calculation # of empty buckets
+		// Not really used.
 		int V = 0;
 		for (int i = 0; i < m; i++) if (M[i] == 0) V++;
 		return V;
 	}
 
 	public double E () {
-		calculateZ();
 		// Estimation of the number of distinct elements
+		calculateZ();
 		double E = (m * m * Z * 0.7213)/(1.0 + (1.079/m));
-//		if (E < 2.5*m and V > 0) then E:= m * ln(m/V)
-		System.err.println("E before if statement:\n" + E);
-		System.err.println("\nV in the field:\n" + V);
-		System.err.println("\nNaive V:\n" + naiveV());
-		if ((E < (2.5 * m)) && (V > 0)) {
-			E = ((double) m) * Math.log(((double)m)/((double)V));
-		}
-		// some problem here
+		if ((E < (2.5 * m)) && (V > 0)) E = ((double) m) * Math.log(((double)m)/((double)V));
 		return E;
-
 	}
 
 	static boolean isPowerOfTwo (int n) {
@@ -136,7 +135,7 @@ public class Ex3 {
 		// the larger the more precise
 
 //	for i:=1 to n do
-		// another parameter of the algorithm: the number of intergers
+		// another parameter of the algorithm: the number of integers
 
 // j := f(y[i])
 //	    M[j] := max(M[j],rho(h(y[i])))
