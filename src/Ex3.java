@@ -88,7 +88,7 @@ public class Ex3 {
 		// 1024 -> 21
 
 		// equivalent to:
-		// return ((y*0xbc164501) & 0x7fe00000) >> Integer.toBinaryString(m);
+		// return ((y*0xbc164501) & 0x7fe00000) >> Integer.numberOfLeadingZeros(m);
 	}
 
 	private static int log (int x, int base) { return (int) (Math.log(x) / Math.log(base)); }
