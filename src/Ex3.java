@@ -77,13 +77,21 @@ public class Ex3 {
 	private static int rho (int x) {
 		if (x == 0) throw new InputMismatchException("Zero has no leading zeroes.");
 		return Integer.numberOfLeadingZeros(x) + 1;
+		// equivalent to:
+		// return (31 - log(x,2)) + 1;
 	}
 
 	private int f (int y) {
-		return ((y*0xbc164501) & 0x7fe00000) >> 21;
+		return ((y*0xbc164501) & 0x7fe00000) >> (31 - log(m,2));
+		// for m = 1024 this is the f function
 		// 21 should be a function of the size of m.
 		// 1024 -> 21
+
+		// equivalent to:
+		// return ((y*0xbc164501) & 0x7fe00000) >> Integer.toBinaryString(m);
 	}
+
+	private static int log (int x, int base) { return (int) (Math.log(x) / Math.log(base)); }
 
 	public void addToM(int x) {
 		// adds another integer to the matrix M
