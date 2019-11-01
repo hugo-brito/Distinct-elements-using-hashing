@@ -82,7 +82,14 @@ public class Ex3 {
 	}
 
 	private int f (int y) {
-		return ((y*0xbc164501) & 0x7fe00000) >> (31 - log(m,2));
+		return ((y*0xbc164501) & 0x7fffffff) >> (31 - log(m,2));
+		//							^^^^^^^
+		//  I've tweaked f so it depends on the size of m
+
+		// old implementation:
+		// return ((y*0xbc164501) & 0x7fe00000) >> (31 - log(m,2));
+
+
 		// for m = 1024 this is the f function
 		// 21 should be a function of the size of m.
 		// 1024 -> 21
