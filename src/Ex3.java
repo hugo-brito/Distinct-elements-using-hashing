@@ -157,7 +157,7 @@ public class Ex3 {
 			ex3.addToM(sc.nextInt());
 		}
 
-		System.err.println(ex3.V == ex3.naiveV());
+//		System.err.println(ex3.V == ex3.naiveV());
 		double E = ex3.E();
 		System.err.println(E);
 
