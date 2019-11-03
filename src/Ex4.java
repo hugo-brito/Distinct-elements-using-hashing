@@ -20,7 +20,7 @@ n(1 +- 2sigma) for sigma = 1.04/sqrt(m)
 	private final int a;
 	private final int b;
 
-	private final Set<Integer> numbers;
+	private final Set<Integer> integers;
 	private final Random random;
 
 	private int max;
@@ -43,7 +43,7 @@ n(1 +- 2sigma) for sigma = 1.04/sqrt(m)
 
 //		ex4.reportMinMax();
 
-		for (Integer i : ex4.getNumbers()) System.out.println(i);
+		for (Integer i : ex4.getIntegers()) System.out.println(i);
 
 	}
 
@@ -55,7 +55,7 @@ n(1 +- 2sigma) for sigma = 1.04/sqrt(m)
 		this.a = a;
 		this.b = b;
 
-		numbers = new HashSet<>();
+		integers = new HashSet<>();
 		max = Integer.MIN_VALUE;
 		min = Integer.MAX_VALUE;
 
@@ -75,16 +75,17 @@ n(1 +- 2sigma) for sigma = 1.04/sqrt(m)
 
 		do {
 			int i = a + random.nextInt(-a + b + 1);
-			numbers.add(i);
+			if (i == 0) continue; // zero cannot be used because it has no leading zeros and cannot be hashed
+			integers.add(i);
 			if (i > max) max = i;
 			if (i < min) min = i;
-		} while (numbers.size() < n);
+		} while (integers.size() < n);
 	}
 
-	public Set<Integer> getNumbers() { return numbers; }
+	public Set<Integer> getIntegers() { return integers; }
 
 	@Override
-	public String toString() { return numbers.toString(); }
+	public String toString() { return integers.toString(); }
 
 	public void print() {
 		System.out.println(toString());
