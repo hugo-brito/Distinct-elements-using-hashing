@@ -75,10 +75,11 @@ n(1 +- 2sigma) for sigma = 1.04/sqrt(m)
 
 		do {
 			int i = a + random.nextInt(-a + b + 1);
-			if (i == 0) continue; // zero cannot be used because it has no leading zeros and cannot be hashed
-			integers.add(i);
-			if (i > max) max = i;
-			if (i < min) min = i;
+			if (i != 0) { // zero cannot be used because it has no leading zeros and cannot be hashed
+				integers.add(i);
+				if (i > max) max = i;
+				if (i < min) min = i;
+			}			
 		} while (integers.size() < n);
 	}
 

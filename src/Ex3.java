@@ -75,7 +75,7 @@ public class Ex3 {
 	}
 
 	private static int rho (int x) {
-		if (x == 0) throw new InputMismatchException("Zero has no leading zeroes.");
+		// if (x == 0) throw new InputMismatchException("Zero has no leading zeroes.");
 		return Integer.numberOfLeadingZeros(x) + 1;
 		// equivalent to:
 		// return (31 - log(x,2)) + 1;
@@ -149,19 +149,28 @@ public class Ex3 {
 	}
 
 	public static void main(String[] args) {
-		Ex3 ex3 = new Ex3();
+//		// Codejudge:
+// 		Ex3 ex3 = new Ex3();
 
-		Scanner sc = new Scanner(System.in);
-		int threshold = sc.nextInt();
-		while (sc.hasNext()) {
-			ex3.addToM(sc.nextInt());
+// 		Scanner sc = new Scanner(System.in);
+// 		int threshold = sc.nextInt();
+// 		while (sc.hasNext()) {
+// 			ex3.addToM(sc.nextInt());
+// 		}
+
+// //		System.err.println(ex3.V == ex3.naiveV());
+// 		double E = ex3.E();
+// 		System.err.println(E);
+
+// 		System.out.println(E > threshold ? "above" : "below");
+
+		Ex3 ex3 = new Ex3(1024);
+
+		for (int i = 1_000_000; i < 2_000_000; i++) {
+			ex3.addToM(i);
 		}
 
-//		System.err.println(ex3.V == ex3.naiveV());
-		double E = ex3.E();
-		System.err.println(E);
-
-		System.out.println(E > threshold ? "above" : "below");
+		System.out.println(ex3.E());
 
 	}
 }

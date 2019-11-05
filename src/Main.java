@@ -22,7 +22,7 @@ public class Main {
 
 		printHeader();
 
-		for (int i = 1; i < t; i++) {
+		for (int i = 1; i <= t; i++) {
 
 			// each iteration uses a different seed to generate distinct integers
 			long intGeneratorSeed = rand.nextLong();
@@ -44,6 +44,8 @@ public class Main {
 			reportLine(i, 1024, n, m1024);
 
 		}
+
+		
 
 	}
 
