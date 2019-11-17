@@ -1,0 +1,56 @@
+René Haas <renha@itu.dk>
+Hugo Delgado de Brito <hubr@itu.dk>
+
+# General
+Does the .zip file follow the instructions? (report.pdf, authors.txt, reproducibility script or instruction, all necessary code in src/)
+- Yes
+
+Does the report appear to follow the length limit, font size, and margin requirements?
+- Yes, slightly longer than two pages text
+
+Can the experiments be reproduced?
+
+# Exercise 1
+Does the code snippet compute the desired function correctly and efficiently?
+- Yes
+
+How could the code be improved or simplified?
+- No, uses binary and bit shift. Maybe for readability you could divide the code into two or three lines, this is the code snippet: res +=  (Integer.bitCount(A[i] & x) % 2) << (31-i);
+
+Other comments?
+- 
+
+# Exercise 2
+Is the implementation of rho correct? (beware off-by-one errors)
+- Off by one  
+
+How can the plot be improved?
+- Ok plot, but they are off by one. 0 leading zeros leads to "first set bit at position 1" not "... at position 0" as one might expect. So x axis should start at 1. 
+
+Is the discussion convincing and complete?
+- See above
+
+Other comments?
+- No
+
+# Exercise 3
+How can the implementation of the hyperloglog counter be improved?
+- Seems correct all way through but the code is divided into many functions, e.g. the logarithm is defined as a function in the code. Could be shorter and more precise. 
+
+Does the stated estimate appear to be correct?
+- Yes, got exactly the same
+
+Other comments?
+- No
+
+# Exercise 4
+Is the input generator appropriate and are all generated values distinct?
+- I am not quite sure. As far as I understand random.nextInt(a) has 0 as the lower bound and a as the upper bound. They are generating input this way: "int i = a + random.nextInt(-a + b + 1)" and from the report I understand that a is lower bound and b upper bound on the range, but is this the case?
+
+Are the plots useful?
+- Yes
+
+Does the table contain reasonable results?
+- Yes, very close to expected values in the paper
+
+Other comments?
